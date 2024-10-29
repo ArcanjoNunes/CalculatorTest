@@ -66,7 +66,7 @@ namespace CalculatorTest
             Assert.Equal(100, result);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Divide by zero Exception")]
         public void DivideBy_ShouldReturn_ThrowsException()
         {
             // Arrange
@@ -77,6 +77,33 @@ namespace CalculatorTest
 
             // Assert
             Assert.Equal("Attempted to divide by zero.", exception.Message);
+        }
+
+        [Fact(Skip = "Skipped...")]
+        public void Add_Skipped()
+        {
+            // Arrange
+            var calcParam = new CalculatorParameter(80, 20);
+
+            // Act
+            double result = _calculatorRepository.Add(calcParam);
+
+            // Assert
+            Assert.Equal(100, result);
+        }
+
+        [Theory(DisplayName = "Divided By Parameters")]
+        [InlineData(10, 2, 5)]
+        public void DivideByParams(double v1, double v2, double result)
+        {
+            // Arrange
+            var calcParam = new CalculatorParameter(v1, v2);
+
+            // Act
+            double resultCalc = _calculatorRepository.DivideBy(calcParam);
+
+            // Assert
+            Assert.Equal(result, resultCalc, 0);
         }
     }
 }
